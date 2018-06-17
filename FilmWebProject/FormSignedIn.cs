@@ -75,7 +75,6 @@ namespace FilmWebProject
             {
                 sqlConnection.Open();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(String.Format("Select * from Category where CATEGORY_NAME = '{0}'", categoryComboBox.Text), sqlConnection);
-
                 DataSet dataSetCategory = new DataSet("Category");
                 sqlDataAdapter.FillSchema(dataSetCategory, SchemaType.Source, "Category");
                 sqlDataAdapter.Fill(dataSetCategory, "Category");
@@ -83,7 +82,13 @@ namespace FilmWebProject
 
                 DataRow drAnswer = tableCategory.Rows[0];
                 categoryID = Int32.Parse(drAnswer["Id"].ToString());
-                movieBindingSource.Filter = String.Format("CATEGORY_ID = {0}", categoryID);
+//                movieBindingSource.Filter = String.Format("CATEGORY_ID = {0}", categoryID);
+
+                SqlDataAdapter sqlDataAdapterMovie = new SqlDataAdapter(String.Format("Select * from Movie where CATEGORY_ID = {0}", categoryID), sqlConnection);
+
+                DataSet dataSetMovie = new DataSet("MOVIE");
+                sqlDataAdapterMovie.Fill(dataSetMovie, "MOVIE");
+                movieDataGridView.DataSource = dataSetMovie.Tables["MOVIE"];
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -142,8 +147,14 @@ namespace FilmWebProject
                     }
                 }
             }
-            catch (/*System.Exception*/ System.Data.ConstraintException)
+            catch (System.Exception)
             {
+                titleTextBox.Text = "";
+                descriptionTextBox.Text = "";
+                directorTextBox.Text = "";
+                categoryTextBox.Text = "";
+                yearTextBox.Text = "";
+                countryTextBox.Text = "";
             }
 
         }
@@ -202,5 +213,31 @@ namespace FilmWebProject
                 sqlConnection.Close();
             }
         }
-      }
+
+        private void showAllButton_Click(object sender, EventArgs e)
+        {
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\maknez\source\repos\FilmWebProject\FilmWebProject\DatabaseMovies.mdf;Integrated Security=True";
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            int categoryID;
+            try
+            {
+                sqlConnection.Open();
+                SqlDataAdapter sqlDataAdapterMovie = new SqlDataAdapter("Select * from Movie", sqlConnection);
+
+                DataSet dataSetMovie = new DataSet("MOVIE");
+                sqlDataAdapterMovie.Fill(dataSetMovie, "MOVIE");
+                movieDataGridView.DataSource = dataSetMovie.Tables["MOVIE"];
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+            }
+            catch (System.IndexOutOfRangeException)
+            {
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+    }
 }

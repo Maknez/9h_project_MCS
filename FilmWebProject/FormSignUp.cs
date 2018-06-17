@@ -19,6 +19,17 @@ namespace FilmWebProject
             InitializeComponent();
         }
 
+        private string MD5(string Value)
+        {
+            System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] data = System.Text.Encoding.ASCII.GetBytes(Value);
+            data = x.ComputeHash(data);
+            string ret = "";
+            for (int i = 0; i < data.Length; i++)
+                ret += data[i].ToString("x2").ToLower();
+            return ret;
+        }
+
         private void createAccountButton_Click(object sender, EventArgs e)
         {
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\maknez\source\repos\FilmWebProject\FilmWebProject\DatabaseUsers.mdf;Integrated Security=True";
@@ -37,8 +48,9 @@ namespace FilmWebProject
                 string firstname = firstNameTextBox.Text;
                 string surname = surnameTextBox.Text;
                 string username = usernameTextBox.Text;
-                string password = passwordTextBox.Text;
-                string confirmPassword = confirmPasswordTextBox.Text;
+                string password = MD5(passwordTextBox.Text);
+                string confirmPassword = MD5(confirmPasswordTextBox.Text);
+
                 int nextAccountID = tableUsers.Rows.Count + 1;
                 bool accountAlreadyExists = false;
 
@@ -57,11 +69,25 @@ namespace FilmWebProject
                         {
                             SqlCommand cmd = new SqlCommand();
                             cmd.CommandType = System.Data.CommandType.Text;
-                            cmd.CommandText = String.Format("INSERT Users (ID, FIRST_NAME, SURNAME, USERNAME, PASSWORD, ACCESS_LEVEL) VALUES ({0}, '{1}', '{2}', '{3}', '{4}', 1)", nextAccountID, firstname, surname, username, password);
+                            if (adminCheckBox.Checked)
+                            {
+                                cmd.CommandText = String.Format("INSERT Users (ID, FIRST_NAME, SURNAME, USERNAME, PASSWORD, ACCESS_LEVEL) VALUES ({0}, '{1}', '{2}', '{3}', '{4}', 2)", nextAccountID, firstname, surname, username, password);
+                            }
+                            else
+                            {
+                                cmd.CommandText = String.Format("INSERT Users (ID, FIRST_NAME, SURNAME, USERNAME, PASSWORD, ACCESS_LEVEL) VALUES ({0}, '{1}', '{2}', '{3}', '{4}', 1)", nextAccountID, firstname, surname, username, password);
+                            }
+
                             cmd.Connection = sqlConnection;
                             cmd.ExecuteNonQuery();
                             errorMessage.ForeColor = Color.Green;
                             errorMessage.Text = "Account created successfully!";
+                            firstNameTextBox.Text = "";
+                            surnameTextBox.Text = "";
+                            usernameTextBox.Text = "";
+                            passwordTextBox.Text = "";
+                            confirmPasswordTextBox.Text = "";
+                            adminCheckBox.Checked = false;
                         }
                         else
                         {

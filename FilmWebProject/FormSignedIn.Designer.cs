@@ -57,6 +57,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.errorMessage = new System.Windows.Forms.Label();
+            this.showAllButton = new System.Windows.Forms.Button();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mOVIENAMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dESCRIPTIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,7 +107,7 @@
             this.categoryComboBox.DataSource = this.categoryBindingSource1;
             this.categoryComboBox.DisplayMember = "CATEGORY_NAME";
             this.categoryComboBox.FormattingEnabled = true;
-            this.categoryComboBox.Location = new System.Drawing.Point(174, 112);
+            this.categoryComboBox.Location = new System.Drawing.Point(255, 114);
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(116, 21);
             this.categoryComboBox.TabIndex = 8;
@@ -195,7 +196,7 @@
             this.movieDataGridView.DataSource = this.movieBindingSource;
             this.movieDataGridView.Location = new System.Drawing.Point(12, 141);
             this.movieDataGridView.Name = "movieDataGridView";
-            this.movieDataGridView.Size = new System.Drawing.Size(278, 297);
+            this.movieDataGridView.Size = new System.Drawing.Size(359, 297);
             this.movieDataGridView.TabIndex = 18;
             this.movieDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.movieDataGridView_CellClick);
             // 
@@ -305,6 +306,16 @@
             this.errorMessage.Size = new System.Drawing.Size(0, 13);
             this.errorMessage.TabIndex = 39;
             // 
+            // showAllButton
+            // 
+            this.showAllButton.Location = new System.Drawing.Point(174, 112);
+            this.showAllButton.Name = "showAllButton";
+            this.showAllButton.Size = new System.Drawing.Size(75, 23);
+            this.showAllButton.TabIndex = 40;
+            this.showAllButton.Text = "Show All";
+            this.showAllButton.UseVisualStyleBackColor = true;
+            this.showAllButton.Click += new System.EventHandler(this.showAllButton_Click);
+            // 
             // iDDataGridViewTextBoxColumn
             // 
             this.iDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -315,10 +326,10 @@
             // 
             // mOVIENAMEDataGridViewTextBoxColumn
             // 
+            this.mOVIENAMEDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.mOVIENAMEDataGridViewTextBoxColumn.DataPropertyName = "MOVIE_NAME";
             this.mOVIENAMEDataGridViewTextBoxColumn.HeaderText = "MOVIE_NAME";
             this.mOVIENAMEDataGridViewTextBoxColumn.Name = "mOVIENAMEDataGridViewTextBoxColumn";
-            this.mOVIENAMEDataGridViewTextBoxColumn.Width = 192;
             // 
             // dESCRIPTIONDataGridViewTextBoxColumn
             // 
@@ -360,6 +371,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 450);
+            this.Controls.Add(this.showAllButton);
             this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -424,6 +436,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label errorMessage;
+        private System.Windows.Forms.Button showAllButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn mOVIENAMEDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dESCRIPTIONDataGridViewTextBoxColumn;

@@ -19,6 +19,17 @@ namespace FilmWebProject
             InitializeComponent();
         }
 
+        private string MD5(string Value)
+        {
+            System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] data = System.Text.Encoding.ASCII.GetBytes(Value);
+            data = x.ComputeHash(data);
+            string ret = "";
+            for (int i = 0; i < data.Length; i++)
+                ret += data[i].ToString("x2").ToLower();
+            return ret;
+        }
+
         private void signInButton_Click(object sender, EventArgs e)
         {
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\maknez\source\repos\FilmWebProject\FilmWebProject\DatabaseUsers.mdf;Integrated Security=True";
@@ -35,7 +46,7 @@ namespace FilmWebProject
                 DataTable tableUsers = dataSetUsers.Tables["Users"];
 
                 string username = usernameTextBox.Text;
-                string password = passwordTextBox.Text;
+                string password = MD5(passwordTextBox.Text);
              
                 foreach (DataRow drCurrent in tableUsers.Rows)
                 {

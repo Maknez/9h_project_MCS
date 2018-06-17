@@ -42,6 +42,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.adminCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // createAccountButton
@@ -163,11 +165,31 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(37, 264);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(38, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "admin:";
+            // 
+            // adminCheckBox
+            // 
+            this.adminCheckBox.AutoSize = true;
+            this.adminCheckBox.Location = new System.Drawing.Point(73, 265);
+            this.adminCheckBox.Name = "adminCheckBox";
+            this.adminCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.adminCheckBox.TabIndex = 14;
+            this.adminCheckBox.UseVisualStyleBackColor = true;
+            // 
             // FormSignUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(279, 295);
+            this.Controls.Add(this.adminCheckBox);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
@@ -205,5 +227,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox adminCheckBox;
     }
 }
