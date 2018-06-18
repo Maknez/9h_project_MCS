@@ -35,15 +35,19 @@
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
             this.categoryBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataSetMovies = new FilmWebProject.DataSetMovies();
-            this.movieBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.movieTableAdapter = new FilmWebProject.DataSetMoviesTableAdapters.MovieTableAdapter();
-            this.tableAdapterManager = new FilmWebProject.DataSetMoviesTableAdapters.TableAdapterManager();
             this.label3 = new System.Windows.Forms.Label();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.categoryTableAdapter = new FilmWebProject.DataSetMoviesTableAdapters.CategoryTableAdapter();
             this.movieDataGridView = new System.Windows.Forms.DataGridView();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mOVIENAMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dESCRIPTIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cATEGORYIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dIRECTORIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.yEARIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cOUNTRYIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MOVIE_IMAGE = new System.Windows.Forms.DataGridViewImageColumn();
+            this.movieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.titleTextBox = new System.Windows.Forms.TextBox();
             this.categoryTextBox = new System.Windows.Forms.TextBox();
@@ -58,18 +62,17 @@
             this.label8 = new System.Windows.Forms.Label();
             this.errorMessage = new System.Windows.Forms.Label();
             this.showAllButton = new System.Windows.Forms.Button();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mOVIENAMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dESCRIPTIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cATEGORYIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dIRECTORIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.yEARIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cOUNTRYIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.moviePictureBox = new System.Windows.Forms.PictureBox();
+            this.movieTableAdapter = new FilmWebProject.DataSetMoviesTableAdapters.MovieTableAdapter();
+            this.tableAdapterManager = new FilmWebProject.DataSetMoviesTableAdapters.TableAdapterManager();
+            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.categoryTableAdapter = new FilmWebProject.DataSetMoviesTableAdapters.CategoryTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetMovies)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // addButton
@@ -123,25 +126,6 @@
             this.dataSetMovies.DataSetName = "DataSetMovies";
             this.dataSetMovies.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // movieBindingSource
-            // 
-            this.movieBindingSource.DataMember = "Movie";
-            this.movieBindingSource.DataSource = this.dataSetMovies;
-            // 
-            // movieTableAdapter
-            // 
-            this.movieTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.CategoryTableAdapter = null;
-            this.tableAdapterManager.CountryTableAdapter = null;
-            this.tableAdapterManager.DirectorTableAdapter = null;
-            this.tableAdapterManager.MovieTableAdapter = this.movieTableAdapter;
-            this.tableAdapterManager.UpdateOrder = FilmWebProject.DataSetMoviesTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.YearTableAdapter = null;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -172,15 +156,6 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Welcome:";
             // 
-            // categoryBindingSource
-            // 
-            this.categoryBindingSource.DataMember = "Category";
-            this.categoryBindingSource.DataSource = this.dataSetMovies;
-            // 
-            // categoryTableAdapter
-            // 
-            this.categoryTableAdapter.ClearBeforeFill = true;
-            // 
             // movieDataGridView
             // 
             this.movieDataGridView.AutoGenerateColumns = false;
@@ -192,13 +167,76 @@
             this.cATEGORYIDDataGridViewTextBoxColumn,
             this.dIRECTORIDDataGridViewTextBoxColumn,
             this.yEARIDDataGridViewTextBoxColumn,
-            this.cOUNTRYIDDataGridViewTextBoxColumn});
+            this.cOUNTRYIDDataGridViewTextBoxColumn,
+            this.MOVIE_IMAGE});
             this.movieDataGridView.DataSource = this.movieBindingSource;
             this.movieDataGridView.Location = new System.Drawing.Point(12, 141);
             this.movieDataGridView.Name = "movieDataGridView";
             this.movieDataGridView.Size = new System.Drawing.Size(359, 297);
             this.movieDataGridView.TabIndex = 18;
             this.movieDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.movieDataGridView_CellClick);
+            // 
+            // iDDataGridViewTextBoxColumn
+            // 
+            this.iDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.Width = 43;
+            // 
+            // mOVIENAMEDataGridViewTextBoxColumn
+            // 
+            this.mOVIENAMEDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.mOVIENAMEDataGridViewTextBoxColumn.DataPropertyName = "MOVIE_NAME";
+            this.mOVIENAMEDataGridViewTextBoxColumn.HeaderText = "MOVIE_NAME";
+            this.mOVIENAMEDataGridViewTextBoxColumn.Name = "mOVIENAMEDataGridViewTextBoxColumn";
+            // 
+            // dESCRIPTIONDataGridViewTextBoxColumn
+            // 
+            this.dESCRIPTIONDataGridViewTextBoxColumn.DataPropertyName = "DESCRIPTION";
+            this.dESCRIPTIONDataGridViewTextBoxColumn.HeaderText = "DESCRIPTION";
+            this.dESCRIPTIONDataGridViewTextBoxColumn.Name = "dESCRIPTIONDataGridViewTextBoxColumn";
+            this.dESCRIPTIONDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cATEGORYIDDataGridViewTextBoxColumn
+            // 
+            this.cATEGORYIDDataGridViewTextBoxColumn.DataPropertyName = "CATEGORY_ID";
+            this.cATEGORYIDDataGridViewTextBoxColumn.HeaderText = "CATEGORY_ID";
+            this.cATEGORYIDDataGridViewTextBoxColumn.Name = "cATEGORYIDDataGridViewTextBoxColumn";
+            this.cATEGORYIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // dIRECTORIDDataGridViewTextBoxColumn
+            // 
+            this.dIRECTORIDDataGridViewTextBoxColumn.DataPropertyName = "DIRECTOR_ID";
+            this.dIRECTORIDDataGridViewTextBoxColumn.HeaderText = "DIRECTOR_ID";
+            this.dIRECTORIDDataGridViewTextBoxColumn.Name = "dIRECTORIDDataGridViewTextBoxColumn";
+            this.dIRECTORIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // yEARIDDataGridViewTextBoxColumn
+            // 
+            this.yEARIDDataGridViewTextBoxColumn.DataPropertyName = "YEAR_ID";
+            this.yEARIDDataGridViewTextBoxColumn.HeaderText = "YEAR_ID";
+            this.yEARIDDataGridViewTextBoxColumn.Name = "yEARIDDataGridViewTextBoxColumn";
+            this.yEARIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cOUNTRYIDDataGridViewTextBoxColumn
+            // 
+            this.cOUNTRYIDDataGridViewTextBoxColumn.DataPropertyName = "COUNTRY_ID";
+            this.cOUNTRYIDDataGridViewTextBoxColumn.HeaderText = "COUNTRY_ID";
+            this.cOUNTRYIDDataGridViewTextBoxColumn.Name = "cOUNTRYIDDataGridViewTextBoxColumn";
+            this.cOUNTRYIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // MOVIE_IMAGE
+            // 
+            this.MOVIE_IMAGE.DataPropertyName = "MOVIE_IMAGE";
+            this.MOVIE_IMAGE.HeaderText = "MOVIE_IMAGE";
+            this.MOVIE_IMAGE.Name = "MOVIE_IMAGE";
+            this.MOVIE_IMAGE.Visible = false;
+            // 
+            // movieBindingSource
+            // 
+            this.movieBindingSource.DataMember = "Movie";
+            this.movieBindingSource.DataSource = this.dataSetMovies;
             // 
             // descriptionTextBox
             // 
@@ -316,61 +354,44 @@
             this.showAllButton.UseVisualStyleBackColor = true;
             this.showAllButton.Click += new System.EventHandler(this.showAllButton_Click);
             // 
-            // iDDataGridViewTextBoxColumn
+            // moviePictureBox
             // 
-            this.iDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.Width = 43;
+            this.moviePictureBox.Location = new System.Drawing.Point(408, 192);
+            this.moviePictureBox.Name = "moviePictureBox";
+            this.moviePictureBox.Size = new System.Drawing.Size(121, 125);
+            this.moviePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.moviePictureBox.TabIndex = 41;
+            this.moviePictureBox.TabStop = false;
             // 
-            // mOVIENAMEDataGridViewTextBoxColumn
+            // movieTableAdapter
             // 
-            this.mOVIENAMEDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.mOVIENAMEDataGridViewTextBoxColumn.DataPropertyName = "MOVIE_NAME";
-            this.mOVIENAMEDataGridViewTextBoxColumn.HeaderText = "MOVIE_NAME";
-            this.mOVIENAMEDataGridViewTextBoxColumn.Name = "mOVIENAMEDataGridViewTextBoxColumn";
+            this.movieTableAdapter.ClearBeforeFill = true;
             // 
-            // dESCRIPTIONDataGridViewTextBoxColumn
+            // tableAdapterManager
             // 
-            this.dESCRIPTIONDataGridViewTextBoxColumn.DataPropertyName = "DESCRIPTION";
-            this.dESCRIPTIONDataGridViewTextBoxColumn.HeaderText = "DESCRIPTION";
-            this.dESCRIPTIONDataGridViewTextBoxColumn.Name = "dESCRIPTIONDataGridViewTextBoxColumn";
-            this.dESCRIPTIONDataGridViewTextBoxColumn.Visible = false;
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.CategoryTableAdapter = null;
+            this.tableAdapterManager.CountryTableAdapter = null;
+            this.tableAdapterManager.DirectorTableAdapter = null;
+            this.tableAdapterManager.MovieTableAdapter = this.movieTableAdapter;
+            this.tableAdapterManager.UpdateOrder = FilmWebProject.DataSetMoviesTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.YearTableAdapter = null;
             // 
-            // cATEGORYIDDataGridViewTextBoxColumn
+            // categoryBindingSource
             // 
-            this.cATEGORYIDDataGridViewTextBoxColumn.DataPropertyName = "CATEGORY_ID";
-            this.cATEGORYIDDataGridViewTextBoxColumn.HeaderText = "CATEGORY_ID";
-            this.cATEGORYIDDataGridViewTextBoxColumn.Name = "cATEGORYIDDataGridViewTextBoxColumn";
-            this.cATEGORYIDDataGridViewTextBoxColumn.Visible = false;
+            this.categoryBindingSource.DataMember = "Category";
+            this.categoryBindingSource.DataSource = this.dataSetMovies;
             // 
-            // dIRECTORIDDataGridViewTextBoxColumn
+            // categoryTableAdapter
             // 
-            this.dIRECTORIDDataGridViewTextBoxColumn.DataPropertyName = "DIRECTOR_ID";
-            this.dIRECTORIDDataGridViewTextBoxColumn.HeaderText = "DIRECTOR_ID";
-            this.dIRECTORIDDataGridViewTextBoxColumn.Name = "dIRECTORIDDataGridViewTextBoxColumn";
-            this.dIRECTORIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // yEARIDDataGridViewTextBoxColumn
-            // 
-            this.yEARIDDataGridViewTextBoxColumn.DataPropertyName = "YEAR_ID";
-            this.yEARIDDataGridViewTextBoxColumn.HeaderText = "YEAR_ID";
-            this.yEARIDDataGridViewTextBoxColumn.Name = "yEARIDDataGridViewTextBoxColumn";
-            this.yEARIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // cOUNTRYIDDataGridViewTextBoxColumn
-            // 
-            this.cOUNTRYIDDataGridViewTextBoxColumn.DataPropertyName = "COUNTRY_ID";
-            this.cOUNTRYIDDataGridViewTextBoxColumn.HeaderText = "COUNTRY_ID";
-            this.cOUNTRYIDDataGridViewTextBoxColumn.Name = "cOUNTRYIDDataGridViewTextBoxColumn";
-            this.cOUNTRYIDDataGridViewTextBoxColumn.Visible = false;
+            this.categoryTableAdapter.ClearBeforeFill = true;
             // 
             // FormSignedIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 450);
+            this.Controls.Add(this.moviePictureBox);
             this.Controls.Add(this.showAllButton);
             this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.label7);
@@ -398,9 +419,10 @@
             this.Load += new System.EventHandler(this.FormSignedInAdmin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetMovies)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,6 +459,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label errorMessage;
         private System.Windows.Forms.Button showAllButton;
+        private System.Windows.Forms.PictureBox moviePictureBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn mOVIENAMEDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dESCRIPTIONDataGridViewTextBoxColumn;
@@ -444,5 +467,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dIRECTORIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn yEARIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cOUNTRYIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewImageColumn MOVIE_IMAGE;
     }
 }

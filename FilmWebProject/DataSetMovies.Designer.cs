@@ -1283,6 +1283,8 @@ namespace FilmWebProject {
             
             private global::System.Data.DataColumn columnCOUNTRY_ID;
             
+            private global::System.Data.DataColumn columnMOVIE_IMAGE;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public MovieDataTable() {
@@ -1374,6 +1376,14 @@ namespace FilmWebProject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn MOVIE_IMAGEColumn {
+                get {
+                    return this.columnMOVIE_IMAGE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1409,7 +1419,7 @@ namespace FilmWebProject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public MovieRow AddMovieRow(int ID, string MOVIE_NAME, string DESCRIPTION, CategoryRow parentCategoryRowByFK_Movie_Category, DirectorRow parentDirectorRowByFK_Movie_Director, YearRow parentYearRowByFK_Movie_Year, CountryRow parentCountryRowByFK_Movie_Country) {
+            public MovieRow AddMovieRow(int ID, string MOVIE_NAME, string DESCRIPTION, CategoryRow parentCategoryRowByFK_Movie_Category, DirectorRow parentDirectorRowByFK_Movie_Director, YearRow parentYearRowByFK_Movie_Year, CountryRow parentCountryRowByFK_Movie_Country, byte[] MOVIE_IMAGE) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
@@ -1418,7 +1428,8 @@ namespace FilmWebProject {
                         null,
                         null,
                         null,
-                        null};
+                        null,
+                        MOVIE_IMAGE};
                 if ((parentCategoryRowByFK_Movie_Category != null)) {
                     columnValuesArray[3] = parentCategoryRowByFK_Movie_Category[0];
                 }
@@ -1467,6 +1478,7 @@ namespace FilmWebProject {
                 this.columnDIRECTOR_ID = base.Columns["DIRECTOR_ID"];
                 this.columnYEAR_ID = base.Columns["YEAR_ID"];
                 this.columnCOUNTRY_ID = base.Columns["COUNTRY_ID"];
+                this.columnMOVIE_IMAGE = base.Columns["MOVIE_IMAGE"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1486,6 +1498,8 @@ namespace FilmWebProject {
                 base.Columns.Add(this.columnYEAR_ID);
                 this.columnCOUNTRY_ID = new global::System.Data.DataColumn("COUNTRY_ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCOUNTRY_ID);
+                this.columnMOVIE_IMAGE = new global::System.Data.DataColumn("MOVIE_IMAGE", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMOVIE_IMAGE);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AllowDBNull = false;
@@ -2134,6 +2148,22 @@ namespace FilmWebProject {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte[] MOVIE_IMAGE {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableMovie.MOVIE_IMAGEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Wartość z kolumny \'MOVIE_IMAGE\' w tabeli \'Movie\' to DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.MOVIE_IMAGEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public CategoryRow CategoryRow {
                 get {
                     return ((CategoryRow)(this.GetParentRow(this.Table.ParentRelations["FK_Movie_Category"])));
@@ -2174,6 +2204,18 @@ namespace FilmWebProject {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Movie_Year"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMOVIE_IMAGENull() {
+                return this.IsNull(this.tableMovie.MOVIE_IMAGEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMOVIE_IMAGENull() {
+                this[this.tableMovie.MOVIE_IMAGEColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3439,12 +3481,13 @@ namespace FilmWebProject.DataSetMoviesTableAdapters {
             tableMapping.ColumnMappings.Add("DIRECTOR_ID", "DIRECTOR_ID");
             tableMapping.ColumnMappings.Add("YEAR_ID", "YEAR_ID");
             tableMapping.ColumnMappings.Add("COUNTRY_ID", "COUNTRY_ID");
+            tableMapping.ColumnMappings.Add("MOVIE_IMAGE", "MOVIE_IMAGE");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Movie] WHERE (([ID] = @Original_ID) AND ([CATEGORY_ID] = @Orig" +
-                "inal_CATEGORY_ID) AND ([DIRECTOR_ID] = @Original_DIRECTOR_ID) AND ([YEAR_ID] = @" +
-                "Original_YEAR_ID) AND ([COUNTRY_ID] = @Original_COUNTRY_ID))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Movie] WHERE (([ID] = @Original_ID) AND ([CATEGORY_ID] = @Original_C" +
+                "ATEGORY_ID) AND ([DIRECTOR_ID] = @Original_DIRECTOR_ID) AND ([YEAR_ID] = @Origin" +
+                "al_YEAR_ID) AND ([COUNTRY_ID] = @Original_COUNTRY_ID))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CATEGORY_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -3453,8 +3496,8 @@ namespace FilmWebProject.DataSetMoviesTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COUNTRY_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COUNTRY_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Movie] ([ID], [MOVIE_NAME], [DESCRIPTION], [CATEGORY_ID], [DIRECTOR_ID], [YEAR_ID], [COUNTRY_ID]) VALUES (@ID, @MOVIE_NAME, @DESCRIPTION, @CATEGORY_ID, @DIRECTOR_ID, @YEAR_ID, @COUNTRY_ID);
-SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_ID FROM Movie WHERE (ID = @ID)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Movie] ([ID], [MOVIE_NAME], [DESCRIPTION], [CATEGORY_ID], [DIRECTOR_ID], [YEAR_ID], [COUNTRY_ID], [MOVIE_IMAGE]) VALUES (@ID, @MOVIE_NAME, @DESCRIPTION, @CATEGORY_ID, @DIRECTOR_ID, @YEAR_ID, @COUNTRY_ID, @MOVIE_IMAGE);
+SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_ID, MOVIE_IMAGE FROM Movie WHERE (ID = @ID)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOVIE_NAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MOVIE_NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3463,10 +3506,11 @@ SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_I
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DIRECTOR_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DIRECTOR_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@YEAR_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "YEAR_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COUNTRY_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COUNTRY_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOVIE_IMAGE", global::System.Data.SqlDbType.Image, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MOVIE_IMAGE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Movie] SET [ID] = @ID, [MOVIE_NAME] = @MOVIE_NAME, [DESCRIPTION] = @DESCRIPTION, [CATEGORY_ID] = @CATEGORY_ID, [DIRECTOR_ID] = @DIRECTOR_ID, [YEAR_ID] = @YEAR_ID, [COUNTRY_ID] = @COUNTRY_ID WHERE (([ID] = @Original_ID) AND ([CATEGORY_ID] = @Original_CATEGORY_ID) AND ([DIRECTOR_ID] = @Original_DIRECTOR_ID) AND ([YEAR_ID] = @Original_YEAR_ID) AND ([COUNTRY_ID] = @Original_COUNTRY_ID));
-SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_ID FROM Movie WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Movie] SET [ID] = @ID, [MOVIE_NAME] = @MOVIE_NAME, [DESCRIPTION] = @DESCRIPTION, [CATEGORY_ID] = @CATEGORY_ID, [DIRECTOR_ID] = @DIRECTOR_ID, [YEAR_ID] = @YEAR_ID, [COUNTRY_ID] = @COUNTRY_ID, [MOVIE_IMAGE] = @MOVIE_IMAGE WHERE (([ID] = @Original_ID) AND ([CATEGORY_ID] = @Original_CATEGORY_ID) AND ([DIRECTOR_ID] = @Original_DIRECTOR_ID) AND ([YEAR_ID] = @Original_YEAR_ID) AND ([COUNTRY_ID] = @Original_COUNTRY_ID));
+SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_ID, MOVIE_IMAGE FROM Movie WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOVIE_NAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MOVIE_NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3475,6 +3519,7 @@ SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_I
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DIRECTOR_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DIRECTOR_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@YEAR_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "YEAR_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COUNTRY_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COUNTRY_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MOVIE_IMAGE", global::System.Data.SqlDbType.Image, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MOVIE_IMAGE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CATEGORY_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DIRECTOR_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DIRECTOR_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -3496,7 +3541,7 @@ SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_I
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_ID" +
-                " FROM dbo.Movie";
+                ", MOVIE_IMAGE FROM Movie";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -3583,7 +3628,7 @@ SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_I
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int ID, string MOVIE_NAME, string DESCRIPTION, int CATEGORY_ID, int DIRECTOR_ID, int YEAR_ID, int COUNTRY_ID) {
+        public virtual int Insert(int ID, string MOVIE_NAME, string DESCRIPTION, int CATEGORY_ID, int DIRECTOR_ID, int YEAR_ID, int COUNTRY_ID, byte[] MOVIE_IMAGE) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID));
             if ((MOVIE_NAME == null)) {
                 throw new global::System.ArgumentNullException("MOVIE_NAME");
@@ -3601,6 +3646,12 @@ SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_I
             this.Adapter.InsertCommand.Parameters[4].Value = ((int)(DIRECTOR_ID));
             this.Adapter.InsertCommand.Parameters[5].Value = ((int)(YEAR_ID));
             this.Adapter.InsertCommand.Parameters[6].Value = ((int)(COUNTRY_ID));
+            if ((MOVIE_IMAGE == null)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((byte[])(MOVIE_IMAGE));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3621,7 +3672,7 @@ SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_I
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, string MOVIE_NAME, string DESCRIPTION, int CATEGORY_ID, int DIRECTOR_ID, int YEAR_ID, int COUNTRY_ID, int Original_ID, int Original_CATEGORY_ID, int Original_DIRECTOR_ID, int Original_YEAR_ID, int Original_COUNTRY_ID) {
+        public virtual int Update(int ID, string MOVIE_NAME, string DESCRIPTION, int CATEGORY_ID, int DIRECTOR_ID, int YEAR_ID, int COUNTRY_ID, byte[] MOVIE_IMAGE, int Original_ID, int Original_CATEGORY_ID, int Original_DIRECTOR_ID, int Original_YEAR_ID, int Original_COUNTRY_ID) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
             if ((MOVIE_NAME == null)) {
                 throw new global::System.ArgumentNullException("MOVIE_NAME");
@@ -3639,11 +3690,17 @@ SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_I
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(DIRECTOR_ID));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(YEAR_ID));
             this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(COUNTRY_ID));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_CATEGORY_ID));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_DIRECTOR_ID));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_YEAR_ID));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_COUNTRY_ID));
+            if ((MOVIE_IMAGE == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((byte[])(MOVIE_IMAGE));
+            }
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_ID));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_CATEGORY_ID));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_DIRECTOR_ID));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_YEAR_ID));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_COUNTRY_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3664,8 +3721,8 @@ SELECT ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_I
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string MOVIE_NAME, string DESCRIPTION, int CATEGORY_ID, int DIRECTOR_ID, int YEAR_ID, int COUNTRY_ID, int Original_ID, int Original_CATEGORY_ID, int Original_DIRECTOR_ID, int Original_YEAR_ID, int Original_COUNTRY_ID) {
-            return this.Update(Original_ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_ID, Original_ID, Original_CATEGORY_ID, Original_DIRECTOR_ID, Original_YEAR_ID, Original_COUNTRY_ID);
+        public virtual int Update(string MOVIE_NAME, string DESCRIPTION, int CATEGORY_ID, int DIRECTOR_ID, int YEAR_ID, int COUNTRY_ID, byte[] MOVIE_IMAGE, int Original_ID, int Original_CATEGORY_ID, int Original_DIRECTOR_ID, int Original_YEAR_ID, int Original_COUNTRY_ID) {
+            return this.Update(Original_ID, MOVIE_NAME, DESCRIPTION, CATEGORY_ID, DIRECTOR_ID, YEAR_ID, COUNTRY_ID, MOVIE_IMAGE, Original_ID, Original_CATEGORY_ID, Original_DIRECTOR_ID, Original_YEAR_ID, Original_COUNTRY_ID);
         }
     }
     

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.IO;
 namespace FilmWebProject
 {
     public partial class FormSignedIn : Form
@@ -101,7 +102,12 @@ namespace FilmWebProject
                 sqlConnection.Close();
             }
         }
-
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
         private void movieDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -110,7 +116,7 @@ namespace FilmWebProject
                 DataGridViewRow dataGridViewRow = movieDataGridView.Rows[index];
                 titleTextBox.Text = dataGridViewRow.Cells[1].Value.ToString();
                 descriptionTextBox.Text = dataGridViewRow.Cells[2].Value.ToString();
-
+                moviePictureBox.Image = byteArrayToImage((byte[])dataGridViewRow.Cells[7].Value);
                 string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\maknez\source\repos\FilmWebProject\FilmWebProject\DatabaseMovies.mdf;Integrated Security=True";
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
 
@@ -149,6 +155,7 @@ namespace FilmWebProject
             }
             catch (System.Exception)
             {
+                moviePictureBox.Image = null;
                 titleTextBox.Text = "";
                 descriptionTextBox.Text = "";
                 directorTextBox.Text = "";
